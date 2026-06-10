@@ -1,4 +1,4 @@
-import { Node } from "./index.js";
+import { Node, Tree } from "./index.js";
 describe("test Node class", () => {
   const root = new Node(3);
   test("data attribute", () => {
@@ -11,5 +11,15 @@ describe("test Node class", () => {
   test("right attribute", () => {
     root.right = [8, 2, 3, 4];
     expect(root.right).toEqual([8, 2, 3, 4]);
+  });
+});
+
+describe("test includes method", () => {
+  const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  test("test if tree includes value", () => {
+    expect(bst.includes(3)).toEqual(true);
+  });
+  test("test if tree not includes value", () => {
+    expect(bst.includes(2)).toEqual(false);
   });
 });
