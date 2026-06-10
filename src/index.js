@@ -27,32 +27,31 @@ class Tree {
 
     return root;
   }
-  #traverseTree(value, node) {
+
+  includes(value, node = this.root) {
     if (node.data === value) return true;
 
     if (value < node.data && node.left !== null) {
-      return this.#traverseTree(value, node.left);
+      return this.includes(value, node.left);
     }
     if (value > node.data && node.right !== null) {
-      return this.#traverseTree(value, node.right);
+      return this.includes(value, node.right);
     }
     return false;
   }
-  includes(value) {
-    return this.#traverseTree(value, this.root);
-  }
+  insert(valuse) {}
 }
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null || node === undefined) {
-    return;
-  }
+// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// const prettyPrint = (node, prefix = "", isLeft = true) => {
+//   if (node === null || node === undefined) {
+//     return;
+//   }
 
-  prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-};
+//   prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+//   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+//   prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+// };
 
-prettyPrint(tree.root);
+// prettyPrint(tree.root);
 
 export { Node, Tree };
