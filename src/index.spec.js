@@ -28,8 +28,20 @@ describe("test insert method", () => {
   const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
   test("insert 2 to tree", () => {
     bst.insert(2);
-
     expect(bst.includes(2)).toEqual(true);
-    expect(bst.root.left.left.right.data).toEqual(2);
+    expect(bst.root.left.left.right.left.data).toEqual(2);
+  });
+  test("insert 128 to tree", () => {
+    bst.insert(128);
+    expect(bst.includes(128)).toEqual(true);
+    expect(bst.root.right.right.left.data).toEqual(128);
+  });
+  test("insert 128 two times to tree", () => {
+    bst.insert(128);
+    bst.insert(128);
+    expect(bst.includes(128)).toEqual(true);
+    expect(bst.root.right.right.left.data).toEqual(128);
+    expect(bst.root.right.right.left.right).toEqual(null);
+    expect(bst.root.right.right.left.left).toEqual(null);
   });
 });
