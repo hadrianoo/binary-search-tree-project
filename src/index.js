@@ -6,3 +6,9 @@ class Node {
   }
 }
 export { Node };
+
+class Tree {
+  constructor(arr) {
+    this.root = buildTree(arr);
+  }
+}
