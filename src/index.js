@@ -9,7 +9,7 @@ class Node {
 class Tree {
   constructor(arr) {
     this.array = this.#sortAndRemove(arr);
-    console.log(this.array);
+    // console.log(this.array);
     this.root = this.#buildTree(this.array, 0, this.array.length - 1);
   }
 
@@ -29,46 +29,67 @@ class Tree {
     return root;
   }
 
-  includes(value, node = this.root) {
-    if (node.data === value) return true;
+  includes(value, root = this.root) {
+    if (root.data === value) return true;
 
-    if (value < node.data && node.left !== null) {
-      return this.includes(value, node.left);
+    if (value < root.data && root.left !== null) {
+      return this.includes(value, root.left);
     }
-    if (value > node.data && node.right !== null) {
-      return this.includes(value, node.right);
+    if (value > root.data && root.right !== null) {
+      return this.includes(value, root.right);
     }
     return false;
   }
-  insert(value, node = this.root) {
+  insert(value) {
     if (this.includes(value)) return;
-    if (value < node.data) {
-      if (node.left === null) {
-        node.left = new Node(value);
-        return;
+
+    function insertItem(value, root) {
+      if (root === null) {
+        return new Node(value);
       }
-      this.insert(value, node.left);
-    } else {
-      if (node.right === null) {
-        node.right = new Node(value);
-        return;
+
+      if (value < root.data) {
+        root.left = insertItem(value, root.left);
+      } else if (value > root.data) {
+        root.right = insertItem(value, root.right);
       }
-      this.insert(value, node.right);
+      return root;
     }
+    insertItem(value, this.root);
+  }
+  deleteItem(value) {
+    if (!this.includes(value)) return;
+
+    function delItem(value, root) {
+      if (value < root.data) {
+        root.left = delItem(value, root.left);
+      } else if (value > root.data) {
+        root.right = delItem(value, root.right);
+      } else {
+        if (root.left === null) {
+          return root.right;
+        }
+        if (root.right === null) {
+          return root.left;
+        }
+      }
+      return root;
+    }
+    delItem(value, this.root);
   }
 }
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// tree.deleteItem(1);
+// const prettyPrint = (root, prefix = "", isLeft = true) => {
+//   if (root === null || root === undefined) {
+//     return;
+//   }
 
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null || node === undefined) {
-    return;
-  }
+//   prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+//   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
+//   prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+// };
 
-  prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-};
-
-prettyPrint(tree.root);
+// prettyPrint(tree.root);
 
 export { Node, Tree };

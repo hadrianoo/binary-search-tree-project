@@ -45,3 +45,16 @@ describe("test insert method", () => {
     expect(bst.root.right.right.left.left).toEqual(null);
   });
 });
+describe("test deleteItem method", () => {
+  const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  test("delete when it is last element", () => {
+    bst.deleteItem(3);
+    expect(bst.includes(3)).toEqual(false);
+    expect(bst.root.left.left.right).toEqual(null);
+  });
+  test("delete when it has one element", () => {
+    bst.deleteItem(324);
+    expect(bst.includes(324)).toEqual(false);
+    expect(bst.root.right.right.data).toEqual(6345);
+  });
+});
