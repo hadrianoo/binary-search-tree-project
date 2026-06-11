@@ -81,4 +81,10 @@ describe("test levelOrderForEach method", () => {
     bst.levelOrderForEach(returnNumber);
     expect(testArray).toEqual([8, 4, 67, 1, 5, 9, 324, 3, 7, 23, 6345]);
   });
+
+  test("throw error when there is no callback", () => {
+    expect(() => bst.levelOrderForEach()).toThrow(
+      "TypeError: callback is not a function",
+    );
+  });
 });

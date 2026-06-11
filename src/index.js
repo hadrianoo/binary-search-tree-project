@@ -93,7 +93,11 @@ class Tree {
     let queue = [this.root];
     while (queue.length > 0) {
       const firstElement = queue.shift();
-      callback(firstElement.data);
+      try {
+        callback(firstElement.data);
+      } catch (e) {
+        throw new Error(e);
+      }
       if (firstElement.left !== null) {
         queue.push(firstElement.left);
       }
