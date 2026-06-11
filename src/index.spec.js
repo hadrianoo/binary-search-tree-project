@@ -88,3 +88,23 @@ describe("test levelOrderForEach method", () => {
     );
   });
 });
+describe("test levelOrderForEachRecursive method", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+  test("accept callback and return value", () => {
+    let testArray = [];
+    function returnNumber(num) {
+      testArray.push(num);
+    }
+    bst.levelOrderForEachRecursive(returnNumber);
+    expect(testArray).toEqual([8, 4, 67, 1, 5, 9, 324, 3, 7, 23, 6345]);
+  });
+
+  test("throw error when there is no callback", () => {
+    expect(() => bst.levelOrderForEachRecursive()).toThrow(
+      "TypeError: callback is not a function",
+    );
+  });
+});

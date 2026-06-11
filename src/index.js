@@ -106,6 +106,23 @@ class Tree {
       }
     }
   }
+  levelOrderForEachRecursive(callback, queue = [this.root]) {
+    if (queue.length === 0) return;
+
+    const firstElement = queue.shift();
+    try {
+      callback(firstElement.data);
+    } catch (e) {
+      throw new Error(e);
+    }
+    if (firstElement.left !== null) {
+      queue.push(firstElement.left);
+    }
+    if (firstElement.right !== null) {
+      queue.push(firstElement.right);
+    }
+    return this.levelOrderForEachRecursive(callback, queue);
+  }
 }
 // const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 // const prettyPrint = (root, prefix = "", isLeft = true) => {
