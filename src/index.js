@@ -91,7 +91,6 @@ class Tree {
   }
   levelOrderForEach(callback) {
     let queue = [this.root];
-    console.log(queue[0].data);
     while (queue.length > 0) {
       const firstElement = queue.shift();
       callback(firstElement.data);
@@ -104,17 +103,17 @@ class Tree {
     }
   }
 }
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-const prettyPrint = (root, prefix = "", isLeft = true) => {
-  if (root === null || root === undefined) {
-    return;
-  }
+// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// const prettyPrint = (root, prefix = "", isLeft = true) => {
+//   if (root === null || root === undefined) {
+//     return;
+//   }
 
-  prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
-  prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-};
+//   prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+//   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
+//   prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+// };
 
-prettyPrint(tree.root);
+// prettyPrint(tree.root);
 
 export { Node, Tree };
