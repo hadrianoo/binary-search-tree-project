@@ -46,15 +46,25 @@ describe("test insert method", () => {
   });
 });
 describe("test deleteItem method", () => {
-  const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-  test("delete when it is last element", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+
+  test("delete when it is last child", () => {
     bst.deleteItem(3);
     expect(bst.includes(3)).toEqual(false);
     expect(bst.root.left.left.right).toEqual(null);
   });
-  test("delete when it has one element", () => {
+  test("delete when it has one child", () => {
     bst.deleteItem(324);
     expect(bst.includes(324)).toEqual(false);
+    expect(bst.root.right.right.data).toEqual(6345);
+  });
+  test("delete when it has two child's", () => {
+    bst.deleteItem(67);
+    expect(bst.includes(67)).toEqual(false);
+    expect(bst.root.right.data).toEqual(324);
     expect(bst.root.right.right.data).toEqual(6345);
   });
 });

@@ -60,6 +60,15 @@ class Tree {
   deleteItem(value) {
     if (!this.includes(value)) return;
 
+    function successor(value, root) {
+      if (root.left === null) {
+        const tempData = root.data;
+        root.data = value;
+        return tempData;
+      }
+      return successor(value, root.left);
+    }
+
     function delItem(value, root) {
       if (value < root.data) {
         root.left = delItem(value, root.left);
@@ -72,24 +81,27 @@ class Tree {
         if (root.right === null) {
           return root.left;
         }
+
+        root.data = successor(value, root.right);
+        root.right = delItem(value, root.right);
       }
       return root;
     }
     delItem(value, this.root);
   }
 }
-// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-// tree.deleteItem(1);
-// const prettyPrint = (root, prefix = "", isLeft = true) => {
-//   if (root === null || root === undefined) {
-//     return;
-//   }
+const tree = new Tree([2, 6, 1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+tree.deleteItem(3);
+const prettyPrint = (root, prefix = "", isLeft = true) => {
+  if (root === null || root === undefined) {
+    return;
+  }
 
-//   prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-//   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
-//   prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-// };
+  prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
+  prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+};
 
-// prettyPrint(tree.root);
+prettyPrint(tree.root);
 
 export { Node, Tree };
