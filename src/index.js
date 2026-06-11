@@ -62,9 +62,9 @@ class Tree {
 
     function successor(value, root) {
       if (root.left === null) {
-        const tempData = root.data;
+        const succ = root.data;
         root.data = value;
-        return tempData;
+        return succ;
       }
       return successor(value, root.left);
     }
@@ -89,9 +89,22 @@ class Tree {
     }
     delItem(value, this.root);
   }
+  levelOrderForEach(callback) {
+    let queue = [this.root];
+    console.log(queue[0].data);
+    while (queue.length > 0) {
+      const firstElement = queue.shift();
+      callback(firstElement.data);
+      if (firstElement.left !== null) {
+        queue.push(firstElement.left);
+      }
+      if (firstElement.right !== null) {
+        queue.push(firstElement.right);
+      }
+    }
+  }
 }
-const tree = new Tree([2, 6, 1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-tree.deleteItem(3);
+const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const prettyPrint = (root, prefix = "", isLeft = true) => {
   if (root === null || root === undefined) {
     return;
