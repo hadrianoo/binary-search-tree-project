@@ -113,7 +113,7 @@ class Tree {
     try {
       callback(firstElement.data);
     } catch (e) {
-      throw new Error(e);
+      throw new Error("callback is not a function");
     }
     if (firstElement.left !== null) {
       queue.push(firstElement.left);
@@ -123,6 +123,7 @@ class Tree {
     }
     this.levelOrderForEachRecursive(callback, queue);
   }
+  inOrderForEach(callback) {}
 }
 // const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 // const prettyPrint = (root, prefix = "", isLeft = true) => {
