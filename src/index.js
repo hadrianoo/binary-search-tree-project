@@ -191,19 +191,42 @@ class Tree {
     }
     return level - depth - 1;
   }
-}
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-console.log(tree.height(67));
-const prettyPrint = (root, prefix = "", isLeft = true) => {
-  if (root === null || root === undefined) {
-    return;
+  depth(value) {
+    if (!this.includes(value)) return undefined;
+    let depth = -1;
+    let queue = [this.root];
+    while (queue.length > 0) {
+      let n = queue.length;
+      for (let i = 0; i < n; i++) {
+        const firstElement = queue.shift();
+        if (firstElement.data === value) {
+          queue = [];
+          break;
+        }
+        if (firstElement.left !== null) {
+          queue.push(firstElement.left);
+        }
+        if (firstElement.right !== null) {
+          queue.push(firstElement.right);
+        }
+      }
+      depth++;
+    }
+    return depth;
   }
+}
+// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// console.log(tree.height(67));
+// const prettyPrint = (root, prefix = "", isLeft = true) => {
+//   if (root === null || root === undefined) {
+//     return;
+//   }
 
-  prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
-  prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-};
+//   prettyPrint(root.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+//   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${root.data}`);
+//   prettyPrint(root.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+// };
 
-prettyPrint(tree.root);
+// prettyPrint(tree.root);
 
 export { Node, Tree };

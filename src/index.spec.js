@@ -178,3 +178,24 @@ describe("test height method", () => {
     expect(bst.height(8)).toEqual(3);
   });
 });
+describe("test depth method", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+  test("return depth 1", () => {
+    expect(bst.depth(67)).toEqual(1);
+  });
+  test("return undefined", () => {
+    expect(bst.depth(68)).toBeUndefined();
+  });
+  test("return depth 0", () => {
+    expect(bst.depth(8)).toEqual(0);
+  });
+  test("return depth 2", () => {
+    expect(bst.depth(5)).toEqual(2);
+  });
+  test("return depth 3", () => {
+    expect(bst.depth(3)).toEqual(3);
+  });
+});
