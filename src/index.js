@@ -130,10 +130,10 @@ class Tree {
       throw new Error("callback is not a function");
     }
     if (root.left !== null) {
-      this.inOrderForEach(callback, root.left);
+      this.preOrderForEach(callback, root.left);
     }
     if (root.right !== null) {
-      this.inOrderForEach(callback, root.right);
+      this.preOrderForEach(callback, root.right);
     }
   }
 
@@ -152,10 +152,10 @@ class Tree {
   }
   postOrderForEach(callback, root = this.root) {
     if (root.left !== null) {
-      this.inOrderForEach(callback, root.left);
+      this.postOrderForEach(callback, root.left);
     }
     if (root.right !== null) {
-      this.inOrderForEach(callback, root.right);
+      this.postOrderForEach(callback, root.right);
     }
     try {
       callback(root.data);

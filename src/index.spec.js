@@ -121,7 +121,7 @@ describe("test preOrderForEach method", () => {
     bst.preOrderForEach(returnNumber);
 
     console.log(testArray, "testArray");
-    expect(testArray).toEqual([8, 1, 3, 4, 5, 7, 9, 23, 67, 324, 6345]);
+    expect(testArray).toEqual([8, 4, 1, 3, 5, 7, 67, 9, 23, 324, 6345]);
   });
 
   test("throw error when there is no callback", () => {
@@ -160,7 +160,7 @@ describe("test postOrderForEach method", () => {
     }
     bst.postOrderForEach(returnNumber);
     console.log(testArray, "testArray");
-    expect(testArray).toEqual([1, 3, 4, 5, 7, 9, 23, 67, 324, 6345, 8]);
+    expect(testArray).toEqual([3, 1, 7, 5, 4, 23, 9, 6345, 324, 67, 8]);
   });
 
   test("throw error when there is no callback", () => {
