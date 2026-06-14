@@ -166,7 +166,6 @@ class Tree {
   }
   height(value) {
     if (!this.includes(value)) return undefined;
-    let height = -1;
     let depth = -1;
     let level = 0;
     let queue = [this.root];
@@ -183,6 +182,9 @@ class Tree {
         }
         if (firstElement.right !== null) {
           queue.push(firstElement.right);
+        }
+        if (firstElement === value) {
+          break;
         }
       }
       level++;
