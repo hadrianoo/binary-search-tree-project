@@ -119,8 +119,6 @@ describe("test preOrderForEach method", () => {
       testArray.push(num);
     }
     bst.preOrderForEach(returnNumber);
-
-    console.log(testArray, "testArray");
     expect(testArray).toEqual([8, 4, 1, 3, 5, 7, 67, 9, 23, 324, 6345]);
   });
 
@@ -140,7 +138,6 @@ describe("test inOrderForEach method", () => {
       testArray.push(num);
     }
     bst.inOrderForEach(returnNumber);
-    console.log(testArray, "testArray");
     expect(testArray).toEqual([1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]);
   });
 
@@ -159,11 +156,25 @@ describe("test postOrderForEach method", () => {
       testArray.push(num);
     }
     bst.postOrderForEach(returnNumber);
-    console.log(testArray, "testArray");
     expect(testArray).toEqual([3, 1, 7, 5, 4, 23, 9, 6345, 324, 67, 8]);
   });
 
   test("throw error when there is no callback", () => {
     expect(() => bst.postOrderForEach()).toThrow("callback is not a function");
+  });
+});
+describe("test height method", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+  test("return height 2", () => {
+    expect(bst.height(67)).toEqual(2);
+  });
+  test("return undefined", () => {
+    expect(bst.height(68)).toBeUndefined();
+  });
+  test("return height 3", () => {
+    expect(bst.height(8)).toEqual(3);
   });
 });
