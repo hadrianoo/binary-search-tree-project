@@ -123,7 +123,46 @@ class Tree {
     }
     this.levelOrderForEachRecursive(callback, queue);
   }
-  inOrderForEach(callback) {}
+  preOrderForEach(callback, root = this.root) {
+    try {
+      callback(root.data);
+    } catch (e) {
+      throw new Error("callback is not a function");
+    }
+    if (root.left !== null) {
+      this.inOrderForEach(callback, root.left);
+    }
+    if (root.right !== null) {
+      this.inOrderForEach(callback, root.right);
+    }
+  }
+
+  inOrderForEach(callback, root = this.root) {
+    if (root.left !== null) {
+      this.inOrderForEach(callback, root.left);
+    }
+    try {
+      callback(root.data);
+    } catch (e) {
+      throw new Error("callback is not a function");
+    }
+    if (root.right !== null) {
+      this.inOrderForEach(callback, root.right);
+    }
+  }
+  postOrderForEach(callback, root = this.root) {
+    if (root.left !== null) {
+      this.inOrderForEach(callback, root.left);
+    }
+    if (root.right !== null) {
+      this.inOrderForEach(callback, root.right);
+    }
+    try {
+      callback(root.data);
+    } catch (e) {
+      throw new Error("callback is not a function");
+    }
+  }
 }
 // const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 // const prettyPrint = (root, prefix = "", isLeft = true) => {

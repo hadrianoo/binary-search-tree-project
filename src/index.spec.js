@@ -108,6 +108,27 @@ describe("test levelOrderForEachRecursive method", () => {
     );
   });
 });
+describe("test preOrderForEach method", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+  test("accept callback and return value", () => {
+    let testArray = [];
+    function returnNumber(num) {
+      testArray.push(num);
+    }
+    bst.preOrderForEach(returnNumber);
+
+    console.log(testArray, "testArray");
+    expect(testArray).toEqual([8, 1, 3, 4, 5, 7, 9, 23, 67, 324, 6345]);
+  });
+
+  test("throw error when there is no callback", () => {
+    expect(() => bst.preOrderForEach()).toThrow("callback is not a function");
+  });
+});
+
 describe("test inOrderForEach method", () => {
   let bst = null;
   beforeEach(() => {
@@ -119,10 +140,30 @@ describe("test inOrderForEach method", () => {
       testArray.push(num);
     }
     bst.inOrderForEach(returnNumber);
-    expect(testArray).toEqual([8, 4, 67, 1, 5, 9, 324, 3, 7, 23, 6345]);
+    console.log(testArray, "testArray");
+    expect(testArray).toEqual([1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]);
   });
 
   test("throw error when there is no callback", () => {
     expect(() => bst.inOrderForEach()).toThrow("callback is not a function");
+  });
+});
+describe("test postOrderForEach method", () => {
+  let bst = null;
+  beforeEach(() => {
+    bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+  });
+  test("accept callback and return value", () => {
+    let testArray = [];
+    function returnNumber(num) {
+      testArray.push(num);
+    }
+    bst.postOrderForEach(returnNumber);
+    console.log(testArray, "testArray");
+    expect(testArray).toEqual([1, 3, 4, 5, 7, 9, 23, 67, 324, 6345, 8]);
+  });
+
+  test("throw error when there is no callback", () => {
+    expect(() => bst.postOrderForEach()).toThrow("callback is not a function");
   });
 });
